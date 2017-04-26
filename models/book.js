@@ -1,7 +1,7 @@
-const mongoose = require('mongoose');
+var mongoose = require('mongoose');
 
 // Book Schema
-const bookSchema = mongoose.Schema({
+var bookSchema = mongoose.Schema({
         title:{
             type: String,
             require: true
@@ -23,7 +23,7 @@ const bookSchema = mongoose.Schema({
         pages:{
             type: String
         },
-        img_url:{
+        image_url:{
             type: String
         },
         buy_url:{
@@ -35,7 +35,7 @@ const bookSchema = mongoose.Schema({
         }
 });
 
-const Book = module.exports = mongoose.model('Book', bookSchema);
+var Book = module.exports = mongoose.model('Book', bookSchema);
 
 // Get Books
 module.exports.getBooks = function(callback, limit){
@@ -56,23 +56,23 @@ module.exports.addBook = function(book, callback){
 // Update Book
 
 module.exports.updateBook = function(id, book, options, callback){
-    const query = {_id: id};
-    const update = {
+    var query = {_id: id};
+    var update = {
         title: book.title,
         genre: book.genre,
         description: book.description,
         author: book.author,
         publisher: book.publisher,
         pages: book.pages,
-        img_url: book.img_url,
+        image_url: book.image_url,
         buy_url: book.buy_url
-    }
+    };
     Book.findOneAndUpdate(query, update, options, callback);
 };
 
 // Delete Book
 
 module.exports.removeBook = function(id, callback){
-    const query = {_id: id};
+    var query = {_id: id};
     Book.remove(query, callback);
 };

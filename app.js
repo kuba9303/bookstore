@@ -1,16 +1,16 @@
-const express = require('express');
-const app = express();
-const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
+var express = require('express');
+var app = express();
+var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
 
-
+app.use(express.static(__dirname+'/client'));
 app.use(bodyParser.json());
 
 Genre = require('./models/genre');
 Book = require('./models/book');
 //Connect to Mongoose
 mongoose.connect('mongodb://localhost/bookstore');
-const db = mongoose.connection;
+var db = mongoose.connection;
 
 app.get('/', function(req, res){
     res.send('Please use /api/books or /api/genres');
@@ -26,7 +26,7 @@ app.get('/api/genres', function(req, res){
 });
 
 app.post('/api/genres', function(req, res){
-    const genre = req.body;
+    var genre = req.body;
     Genre.addGenres(genre, function(err, genre){
         if (err){
             throw err;
@@ -36,8 +36,8 @@ app.post('/api/genres', function(req, res){
 });
 
 app.put('/api/genres/:_id', function(req, res){
-    const id = req.params._id;
-    const genre = req.body;
+    var id = req.params._id;
+    var genre = req.body;
     Genre.updateGenre(id, genre, {}, function(err, genre){
         if (err){
             throw err;
@@ -47,7 +47,7 @@ app.put('/api/genres/:_id', function(req, res){
 });
 
 app.delete('/api/genres/:_id', function(req, res){
-    const id = req.params._id;
+    var id = req.params._id;
     Genre.removeGenre(id, function(err, genre){
         if (err){
             throw err;
@@ -66,7 +66,7 @@ app.get('/api/books', function(req, res){
 });
 
 app.post('/api/books', function(req, res){
-    const book = req.body;
+    var book = req.body;
     Book.addBook(book, function(err, book){
         if (err){
             throw err;
@@ -76,8 +76,8 @@ app.post('/api/books', function(req, res){
 });
 
 app.put('/api/books/:_id', function(req, res){
-    const id = req.params._id;
-    const book = req.body;
+    var id = req.params._id;
+    var book = req.body;
     Book.updateBook(id, book, {}, function(err, book){
         if (err){
             throw err;
@@ -96,7 +96,7 @@ app.get('/api/books/:_id', function(req, res){
 });
 
 app.delete('/api/books/:_id', function(req, res){
-    const id = req.params._id;
+    var id = req.params._id;
     Book.removeBook(id, function(err, book){
         if (err){
             throw err;
